@@ -17,21 +17,7 @@
 
 ### 📋 已集成API
 
-#### CreatePay统一创单接口
-- **52个核心测试用例**
-  - 直清模式: 13个用例
-  - 账户模式: 10个用例
-  - 担保支付: 6个用例
-  - 分账支付: 12个用例
-  - 云闪付: 3个用例
-  - 异常场景: 6个用例
-  - 性能测试: 2个用例
 
-- **15+种支付方式**
-  - 微信: WECHAT_APPLET, WECHAT_NATIVE, WECHAT_JSAPI, WECHAT_APP, WECHAT_H5
-  - 支付宝: ALIPAY_NATIVE, ALIPAY_APP, ALIPAY_APPLET, ALIPAY_H5
-  - 云闪付: CLOUDPAY_APP, CLOUDPAY_APPLET
-  - 其他: AGGREGATE_CODE, POS_NATIVE, DC_NATIVE, BALANCE_PAY
 
 ## 项目结构
 
