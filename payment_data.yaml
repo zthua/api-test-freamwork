@@ -1,0 +1,30 @@
+data:
+  - case_id: TC001
+    payment_method: WECHAT_NATIVE
+    amount: 100.00
+    currency: CNY
+    expected_status: SUCCESS
+  
+  - case_id: TC002
+    payment_method: ALIPAY_APP
+    amount: 200.50
+    currency: CNY
+    expected_status: SUCCESS
+  
+  - case_id: TC003
+    payment_method: CLOUDPAY_APP
+    amount: 50.00
+    currency: CNY
+    expected_status: SUCCESS
+  
+  - case_id: TC004
+    payment_method: WECHAT_JSAPI
+    amount: 0.01
+    currency: CNY
+    expected_status: SUCCESS
+  
+  - case_id: TC005
+    payment_method: ALIPAY_H5
+    amount: 999.99
+    currency: CNY
+    expected_status: SUCCESS
