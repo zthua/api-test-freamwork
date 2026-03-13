@@ -1,0 +1,24 @@
+# Test Environment Configuration
+
+environment: test
+
+api:
+  base_url: "https://test-api.lianlianpay.com"
+  timeout: 30
+
+merchant:
+  mch_id: "192302209280000045154"
+  sub_mch_id: "302209280000045154"
+  service_provider_id: "602303290000064"
+
+security:
+  private_key_path: "config/keys/test_private_key.pem"
+  public_key_path: "config/keys/test_public_key.pem"
+
+logging:
+  level: "DEBUG"
+  console_output: true
+  file_output: true
+
+performance:
+  enable_metrics: true
