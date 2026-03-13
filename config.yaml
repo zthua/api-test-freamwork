@@ -1,0 +1,64 @@
+# CreatePay Test Framework - Main Configuration
+
+# Environment (will be overridden by env-specific config)
+environment: test
+
+# API Configuration
+api:
+  base_url: "https://test-api.example.com"
+  timeout: 30
+  retry_times: 3
+  notify_url: "https://test.lianlianpay-inc.com/llpaytest/index.html"
+
+# Merchant Configuration
+merchant:
+  mch_id: "192302209280000045154"
+  sub_mch_id: "302209280000045154"
+  service_provider_id: "602303290000064"
+
+# Security Configuration
+security:
+  private_key_path: "config/keys/test_private_key.pem"
+  public_key_path: "config/keys/test_public_key.pem"
+  sign_type: "RSA"
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_max_bytes: 104857600  # 100MB
+  backup_count: 10
+  console_output: true
+  file_output: true
+
+# Report Configuration
+report:
+  allure_results_dir: "reports/allure-results"
+  html_report_dir: "reports/html"
+  junit_xml_path: "reports/junit.xml"
+
+# Concurrent Testing Configuration
+concurrent:
+  thread_count: 10
+  enable_parallel: false
+
+# Performance Testing Configuration
+performance:
+  response_time_threshold:
+    p50: 1000  # milliseconds
+    p95: 2000
+    p99: 3000
+  tps_threshold: 100
+  enable_metrics: true
+
+# Data Generator Configuration
+data_generator:
+  txn_seqno_length: 32
+  user_id_prefix: "U"
+  amount_min: 0.01
+  amount_max: 10000.0
+
+# Test Data Configuration
+test_data:
+  default_order_amount: "40"  # 0.40 yuan
+  default_busi_type: "100001"  # Virtual goods
