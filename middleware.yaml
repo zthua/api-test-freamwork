@@ -1,0 +1,61 @@
+# 中间件配置文件
+# 
+# 中间件按优先级顺序执行,优先级数字越小越先执行
+# enabled: true/false 控制中间件是否启用
+
+middlewares:
+  # 日志中间件 - 记录请求和响应信息
+  - class: middlewares.logging_middleware.LoggingMiddleware
+    priority: 10
+    enabled: true
+    config:
+      log_request: true          # 是否记录请求
+      log_response: true         # 是否记录响应
+      log_level: info            # 日志级别: debug/info/warning/error
+      sensitive_fields:          # 需要脱敏的字段
+        - password
+        - private_key
+        - secret
+        - sign
+        - token
+
+  # 签名中间件 - 自动签名和验签
+  # 注意: 签名中间件需要密钥文件,如果密钥文件不存在,请先运行 scripts/generate_test_keys.py 生成
+  - class: middlewares.signature_middleware.SignatureMiddleware
+    priority: 20
+    enabled: false  # 默认禁用,避免测试时找不到密钥文件
+    config:
+      private_key_path: config/keys/test_private_key.pem  # 私钥路径
+      public_key_path: config/keys/test_public_key.pem    # 公钥路径
+      sign_field: sign                                     # 签名字段名
+      verify_response: true                                # 是否验证响应签名
+
+  # 重试中间件 - 失败自动重试
+  - class: middlewares.retry_middleware.RetryMiddleware
+    priority: 30
+    enabled: true
+    config:
+      max_retries: 3                    # 最大重试次数
+      retry_status_codes:               # 需要重试的HTTP状态码
+        - 500
+        - 502
+        - 503
+        - 504
+      backoff_factor: 1.0               # 退避因子
+      max_backoff: 60                   # 最大退避时间(秒)
+
+  # 性能统计中间件 - 统计响应时间和性能指标
+  - class: middlewares.performance_middleware.PerformanceMiddleware
+    priority: 40
+    enabled: true
+    config:
+      enable_alert: true                # 是否启用性能告警
+      alert_threshold: 5.0              # 告警阈值(秒)
+      collect_metrics: true             # 是否收集性能指标
+      max_samples: 1000                 # 最大样本数
+
+# 使用说明:
+# 1. 可以通过修改 enabled 字段来启用/禁用中间件
+# 2. 可以通过修改 priority 字段来调整中间件执行顺序
+# 3. 可以在 config 中添加自定义配置参数
+# 4. 可以添加自定义中间件,只需继承 BaseMiddleware 并实现 process_request 和 process_response 方法
