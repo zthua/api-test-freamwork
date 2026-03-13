@@ -1,0 +1,28 @@
+# Production Environment Configuration
+
+environment: prod
+
+api:
+  base_url: "https://api.lianlianpay.com"
+  timeout: 30
+
+merchant:
+  mch_id: "PROD_MERCHANT_ID"
+  sub_mch_id: "PROD_SUB_MERCHANT_ID"
+  service_provider_id: "PROD_SERVICE_PROVIDER_ID"
+
+security:
+  private_key_path: "config/keys/prod_private_key.pem"
+  public_key_path: "config/keys/prod_public_key.pem"
+
+logging:
+  level: "WARNING"
+  console_output: false
+  file_output: true
+
+performance:
+  enable_metrics: false
+
+# Disable destructive tests in production
+test_execution:
+  allow_destructive_tests: false
